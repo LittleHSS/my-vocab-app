@@ -1,0 +1,312 @@
+{
+    "words_status": {
+        "pink": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "brown": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "chocolate": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "camel": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "green": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "blue": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "red": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "purple": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "violet": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "white": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "ivory": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "gray": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "scarlet": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "golden": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "orange": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "silver": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "yellow": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "family": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "marriage": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "couple": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "parent": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "single": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "male": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "female": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "husband": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "father": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "foster": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "mother": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "wife": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "son": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "grandson": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "daughter": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "child": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "heir": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "brother": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "sister": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "twin": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "grandfather": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "grandmother": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "granny": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "grandma": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "grandad": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "grandpa": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "uncle": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "aunt": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "nephew": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "niece": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "cousin": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        },
+        "school": {
+            "interval": 1,
+            "next_review": "2026-07-08"
+        },
+        "university": {
+            "interval": 0,
+            "next_review": "2026-07-08"
+        }
+    },
+    "mistakes": {
+        "pink": {
+            "count": 1,
+            "note": ""
+        },
+        "chocolate": {
+            "count": 1,
+            "note": ""
+        },
+        "camel": {
+            "count": 1,
+            "note": ""
+        },
+        "purple": {
+            "count": 1,
+            "note": ""
+        },
+        "violet": {
+            "count": 1,
+            "note": ""
+        },
+        "ivory": {
+            "count": 1,
+            "note": ""
+        },
+        "scarlet": {
+            "count": 1,
+            "note": ""
+        },
+        "orange": {
+            "count": 1,
+            "note": ""
+        },
+        "marriage": {
+            "count": 1,
+            "note": ""
+        },
+        "couple": {
+            "count": 1,
+            "note": ""
+        },
+        "female": {
+            "count": 1,
+            "note": ""
+        },
+        "foster": {
+            "count": 1,
+            "note": ""
+        },
+        "child": {
+            "count": 1,
+            "note": ""
+        },
+        "heir": {
+            "count": 1,
+            "note": ""
+        },
+        "twin": {
+            "count": 1,
+            "note": ""
+        },
+        "grandfather": {
+            "count": 1,
+            "note": ""
+        },
+        "granny": {
+            "count": 1,
+            "note": ""
+        },
+        "grandma": {
+            "count": 1,
+            "note": ""
+        },
+        "grandpa": {
+            "count": 1,
+            "note": ""
+        },
+        "uncle": {
+            "count": 1,
+            "note": ""
+        },
+        "aunt": {
+            "count": 1,
+            "note": ""
+        },
+        "nephew": {
+            "count": 1,
+            "note": ""
+        },
+        "niece": {
+            "count": 1,
+            "note": ""
+        },
+        "cousin": {
+            "count": 1,
+            "note": ""
+        },
+        "university": {
+            "count": 1,
+            "note": ""
+        }
+    },
+    "daily_stats": {
+        "date": "2026-07-07",
+        "new_learned": 50
+    },
+    "streak_days": 1,
+    "last_study_date": "2026-07-07"
+}
