@@ -4,12 +4,19 @@ import json
 import os
 import random
 from datetime import datetime, timedelta
+from github import Github # 新增：用于连接 GitHub 数据库
 
-# --- 页面配置（必须放在最前面） ---
-st.set_page_config(page_title="超级背单词 Web版", page_icon="🌟", layout="centered")
+# --- 页面配置 ---
+st.set_page_config(page_title="超级背单词 云端版", page_icon="☁️", layout="centered")
 
-# --- 数据加载与初始化 ---
 TODAY_STR = datetime.now().strftime("%Y-%m-%d")
+
+# --- 核心：连接 GitHub 云端数据库 ---
+@st.cache_resource
+def get_github_repo():
+    # 读取我们在 Streamlit 后台配置的钥匙
+    g = Github(st.secrets["GITHUB_TOKEN"])
+    return g.get_repo(st.secrets["REPO_NAME"])
 
 @st.cache_data
 def load_words():
@@ -17,7 +24,7 @@ def load_words():
     if os.path.exists('words.csv'):
         with open('words.csv', 'r', encoding='utf-8-sig') as f:
             reader = csv.reader(f)
-            next(reader, None) # 跳过表头
+            next(reader, None)
             for row in reader:
                 if not row: continue
                 word = row[0].strip()
@@ -31,10 +38,13 @@ def load_words():
     return words_dict
 
 def load_progress():
-    if os.path.exists('progress.json'):
-        with open('progress.json', 'r', encoding='utf-8') as f:
-            return json.load(f)
-    else:
+    try:
+        # 从云端读取进度
+        repo = get_github_repo()
+        contents = repo.get_contents("progress.json")
+        return json.loads(contents.decoded_content.decode('utf-8'))
+    except Exception as e:
+        st.warning("首次运行或云端读取失败，已创建新存档。")
         return {
             "words_status": {}, 
             "mistakes": {},     
@@ -43,11 +53,21 @@ def load_progress():
             "last_study_date": ""   
         }
 
-def save_progress(progress):
-    with open('progress.json', 'w', encoding='utf-8') as f:
-        json.dump(progress, f, ensure_ascii=False, indent=4)
+def save_progress(progress_data):
+    try:
+        # 将进度保存回云端
+        repo = get_github_repo()
+        contents = repo.get_contents("progress.json")
+        repo.update_file(
+            contents.path, 
+            "Auto update progress", 
+            json.dumps(progress_data, ensure_ascii=False, indent=4), 
+            contents.sha
+        )
+    except Exception as e:
+        st.error(f"云端同步失败: {e}")
 
-# --- 初始化 Session State（用于在网页刷新时记住状态） ---
+# --- 初始化 Session State ---
 if 'words_dict' not in st.session_state:
     st.session_state.words_dict = load_words()
 if 'progress' not in st.session_state:
@@ -76,7 +96,7 @@ def go_to(page):
 
 # --- 主菜单页面 ---
 def show_main_menu():
-    st.title("🌟 超级背单词 Web版")
+    st.title("☁️ 超级背单词 云端版")
     st.markdown(f"**🔥 连续打卡: {st.session_state.progress.get('streak_days', 0)} 天**")
     
     total_words = len(st.session_state.words_dict)
@@ -133,7 +153,6 @@ def update_streak():
             st.session_state.progress["streak_days"] = 1
         
         st.session_state.progress["last_study_date"] = TODAY_STR
-        save_progress(st.session_state.progress)
 
 def check_answer(user_input, current_word, word_info):
     update_streak()
@@ -167,7 +186,10 @@ def check_answer(user_input, current_word, word_info):
         st.session_state.progress["mistakes"][current_word]["count"] += 1
         st.error(f"❌ 错误！正确答案:\n\n**{current_word}** {word_info['phonetic']}\n\n{word_info['meaning']}")
 
-    save_progress(st.session_state.progress)
+    # 答题后自动同步到云端
+    with st.spinner('正在同步进度到云端...'):
+        save_progress(st.session_state.progress)
+        
     st.session_state.show_answer = True
 
 # --- 答题页面 ---
@@ -191,7 +213,6 @@ def show_quiz():
         st.header(word_info["meaning"])
         st.write("请拼写出对应的英文单词:")
         
-    # 网页版发音按钮 (调用浏览器原生 TTS)
     components_html = f"""
         <button onclick="speak()" style="padding:5px 10px; border-radius:5px; border:1px solid #ccc; background:white;">🔊 朗读</button>
         <script>
