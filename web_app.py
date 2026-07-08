@@ -4,17 +4,109 @@ import json
 import os
 import random
 from datetime import datetime, timedelta
-from github import Github # 新增：用于连接 GitHub 数据库
+from github import Github
 
 # --- 页面配置 ---
-st.set_page_config(page_title="超级背单词 云端版", page_icon="☁️", layout="centered")
+st.set_page_config(page_title="超级背单词", page_icon="🦉", layout="centered")
+
+# --- 注入多邻国风格 CSS ---
+st.markdown("""
+<style>
+    /* 全局字体和背景 */
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+    html, body, [class*="css"]  {
+        font-family: 'Nunito', 'Microsoft YaHei', sans-serif;
+    }
+    
+    /* 隐藏 Streamlit 默认的顶部菜单和底部水印 */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+
+    /* 卡片式布局 */
+    .duo-card {
+        background-color: white;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 4px 0px rgba(229, 229, 229, 1);
+        border: 2px solid #e5e5e5;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    /* 统计数据大字 */
+    .stat-number {
+        font-size: 36px;
+        font-weight: 900;
+        color: #ff4b4b;
+        margin: 0;
+        line-height: 1;
+    }
+    .stat-label {
+        font-size: 14px;
+        color: #afafaf;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    /* 多邻国风格立体按钮 */
+    .stButton > button {
+        width: 100%;
+        border-radius: 16px !important;
+        font-weight: 800 !important;
+        font-size: 16px !important;
+        padding: 10px 24px !important;
+        text-transform: uppercase;
+        transition: all 0.1s ease;
+        border: 2px solid #e5e5e5 !important;
+        border-bottom: 4px solid #e5e5e5 !important;
+        background-color: white !important;
+        color: #4b4b4b !important;
+    }
+    
+    .stButton > button:active {
+        transform: translateY(2px);
+        border-bottom: 2px solid #e5e5e5 !important;
+    }
+
+    /* 主动作按钮 (绿色) */
+    .stButton > button[kind="primary"] {
+        background-color: #58cc02 !important;
+        color: white !important;
+        border: 2px solid #58a700 !important;
+        border-bottom: 4px solid #58a700 !important;
+    }
+    .stButton > button[kind="primary"]:active {
+        border-bottom: 2px solid #58a700 !important;
+    }
+    
+    /* 进度条变粗变圆 */
+    .stProgress > div > div > div > div {
+        background-color: #58cc02;
+        border-radius: 10px;
+    }
+    .stProgress > div > div {
+        height: 16px;
+        border-radius: 10px;
+        background-color: #e5e5e5;
+    }
+    
+    /* 单词大字 */
+    .huge-word {
+        font-size: 48px;
+        font-weight: 900;
+        color: #4b4b4b;
+        text-align: center;
+        margin: 20px 0;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 TODAY_STR = datetime.now().strftime("%Y-%m-%d")
 
 # --- 核心：连接 GitHub 云端数据库 ---
 @st.cache_resource
 def get_github_repo():
-    # 读取我们在 Streamlit 后台配置的钥匙
     g = Github(st.secrets["GITHUB_TOKEN"])
     return g.get_repo(st.secrets["REPO_NAME"])
 
@@ -39,12 +131,10 @@ def load_words():
 
 def load_progress():
     try:
-        # 从云端读取进度
         repo = get_github_repo()
         contents = repo.get_contents("progress.json")
         return json.loads(contents.decoded_content.decode('utf-8'))
     except Exception as e:
-        st.warning("首次运行或云端读取失败，已创建新存档。")
         return {
             "words_status": {}, 
             "mistakes": {},     
@@ -55,7 +145,6 @@ def load_progress():
 
 def save_progress(progress_data):
     try:
-        # 将进度保存回云端
         repo = get_github_repo()
         contents = repo.get_contents("progress.json")
         repo.update_file(
@@ -65,7 +154,7 @@ def save_progress(progress_data):
             contents.sha
         )
     except Exception as e:
-        st.error(f"云端同步失败: {e}")
+        pass
 
 # --- 初始化 Session State ---
 if 'words_dict' not in st.session_state:
@@ -83,48 +172,65 @@ if 'question_type' not in st.session_state:
 if 'show_answer' not in st.session_state:
     st.session_state.show_answer = False
 
-# 每日重置逻辑
 if st.session_state.progress["daily_stats"]["date"] != TODAY_STR:
     st.session_state.progress["daily_stats"]["date"] = TODAY_STR
     st.session_state.progress["daily_stats"]["new_learned"] = 0
     save_progress(st.session_state.progress)
 
-# --- 页面路由 ---
 def go_to(page):
     st.session_state.current_page = page
     st.session_state.show_answer = False
 
 # --- 主菜单页面 ---
 def show_main_menu():
-    st.title("☁️ 超级背单词 云端版")
-    st.markdown(f"**🔥 连续打卡: {st.session_state.progress.get('streak_days', 0)} 天**")
+    st.markdown("<h1 style='text-align: center; color: #58cc02;'>🦉 超级背单词</h1>", unsafe_allow_html=True)
     
-    total_words = len(st.session_state.words_dict)
-    learned_words = len(st.session_state.progress["words_status"])
-    st.progress(learned_words / total_words if total_words > 0 else 0)
-    st.caption(f"总词汇量掌握进度: {learned_words} / {total_words}")
+    # 顶部数据卡片
+    streak = st.session_state.progress.get('streak_days', 0)
+    learned = len(st.session_state.progress["words_status"])
+    total = len(st.session_state.words_dict)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown(f"""
+        <div class="duo-card">
+            <p class="stat-number" style="color:#ff9600;">🔥 {streak}</p>
+            <p class="stat-label">连续打卡天数</p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"""
+        <div class="duo-card">
+            <p class="stat-number" style="color:#1cb0f6;">👑 {learned}</p>
+            <p class="stat-label">已掌握词汇</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    st.progress(learned / total if total > 0 else 0)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     new_learned_today = st.session_state.progress["daily_stats"]["new_learned"]
     new_words_left = max(0, 50 - new_learned_today)
     review_list = [w for w, data in st.session_state.progress["words_status"].items() if data["next_review"] <= TODAY_STR]
     
-    st.divider()
+    # 按钮区
+    if st.button(f"🚀 开始学习新词 ({new_words_left})", type="primary"):
+        start_quiz('learn', new_words_left)
     
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button(f"📖 学习新词 (今日剩 {new_words_left})", use_container_width=True):
-            start_quiz('learn', new_words_left)
-    with col2:
-        if st.button(f"🔄 每日复习 (待复习 {len(review_list)})", use_container_width=True):
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    col3, col4 = st.columns(2)
+    with col3:
+        if st.button(f"🔄 巩固复习 ({len(review_list)})"):
             start_quiz('review', len(review_list))
-            
-    if st.button(f"📓 错题本 ({len(st.session_state.progress['mistakes'])})", use_container_width=True):
-        go_to('mistakes')
+    with col4:
+        if st.button(f"💔 错题本 ({len(st.session_state.progress['mistakes'])})"):
+            go_to('mistakes')
 
 # --- 学习逻辑 ---
 def start_quiz(mode, count):
     if count <= 0:
-        st.warning("这个任务已经完成啦，去看看其他的吧！")
+        st.success("任务完成！去休息一下吧。")
         return
         
     if mode == 'learn':
@@ -151,7 +257,6 @@ def update_streak():
                 st.session_state.progress["streak_days"] = 1 
         else:
             st.session_state.progress["streak_days"] = 1
-        
         st.session_state.progress["last_study_date"] = TODAY_STR
 
 def check_answer(user_input, current_word, word_info):
@@ -175,7 +280,7 @@ def check_answer(user_input, current_word, word_info):
         st.session_state.progress["words_status"][current_word]["interval"] = interval
         next_date = datetime.now() + timedelta(days=interval)
         st.session_state.progress["words_status"][current_word]["next_review"] = next_date.strftime("%Y-%m-%d")
-        st.success(f"✅ 正确！\n\n**{current_word}** {word_info['phonetic']}\n\n{word_info['meaning']}")
+        st.success(f"🎉 太棒了！\n\n**{current_word}** {word_info['phonetic']}\n\n{word_info['meaning']}")
     else:
         st.session_state.progress["words_status"][current_word]["interval"] = 0
         next_date = datetime.now() + timedelta(days=1)
@@ -184,37 +289,41 @@ def check_answer(user_input, current_word, word_info):
         if current_word not in st.session_state.progress["mistakes"]:
             st.session_state.progress["mistakes"][current_word] = {"count": 0, "note": ""}
         st.session_state.progress["mistakes"][current_word]["count"] += 1
-        st.error(f"❌ 错误！正确答案:\n\n**{current_word}** {word_info['phonetic']}\n\n{word_info['meaning']}")
+        st.error(f"👀 差一点点！正确答案是:\n\n**{current_word}** {word_info['phonetic']}\n\n{word_info['meaning']}")
 
-    # 答题后自动同步到云端
-    with st.spinner('正在同步进度到云端...'):
+    with st.spinner('同步进度中...'):
         save_progress(st.session_state.progress)
-        
     st.session_state.show_answer = True
 
 # --- 答题页面 ---
 def show_quiz():
     if st.session_state.quiz_index >= len(st.session_state.quiz_list):
         st.balloons()
-        st.success("太棒了，你已经完成了这组单词！")
-        if st.button("返回主菜单", use_container_width=True):
+        st.success("🎉 你完成了今天的目标！")
+        if st.button("继续保持", type="primary"):
             go_to('main_menu')
         return
 
     current_word = st.session_state.quiz_list[st.session_state.quiz_index]
     word_info = st.session_state.words_dict[current_word]
     
-    st.caption(f"进度: {st.session_state.quiz_index + 1} / {len(st.session_state.quiz_list)}")
+    st.progress((st.session_state.quiz_index) / len(st.session_state.quiz_list))
     
+    st.markdown("<div class='duo-card'>", unsafe_allow_html=True)
     if st.session_state.question_type == 'en2zh':
-        st.header(current_word)
-        st.write("请写出它的中文意思:")
+        st.markdown(f"<p class='huge-word'>{current_word}</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:#afafaf; font-weight:bold;'>写出中文意思</p>", unsafe_allow_html=True)
     else:
-        st.header(word_info["meaning"])
-        st.write("请拼写出对应的英文单词:")
+        st.markdown(f"<p class='huge-word'>{word_info['meaning']}</p>", unsafe_allow_html=True)
+        st.markdown("<p style='color:#afafaf; font-weight:bold;'>拼写英文单词</p>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
         
     components_html = f"""
-        <button onclick="speak()" style="padding:5px 10px; border-radius:5px; border:1px solid #ccc; background:white;">🔊 朗读</button>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button onclick="speak()" style="background:#1cb0f6; color:white; border:none; padding:12px 24px; border-radius:16px; font-weight:bold; font-size:16px; cursor:pointer; box-shadow: 0 4px 0 #1899d6;">
+                🔊 播放发音
+            </button>
+        </div>
         <script>
             function speak() {{
                 var msg = new SpeechSynthesisUtterance('{current_word}');
@@ -223,46 +332,46 @@ def show_quiz():
             }}
         </script>
     """
-    st.components.v1.html(components_html, height=40)
+    st.components.v1.html(components_html, height=70)
 
     if not st.session_state.show_answer:
-        with st.form(key='answer_form'):
-            user_input = st.text_input("你的答案:", key="user_input")
-            submit_button = st.form_submit_button(label='提交答案')
+        with st.form(key='answer_form', clear_on_submit=True):
+            user_input = st.text_input("✍️ 你的答案:", key="user_input")
+            submit_button = st.form_submit_button(label='提交检查')
             
             if submit_button:
                 check_answer(user_input, current_word, word_info)
                 st.rerun()
     else:
-        if st.button("下一个 ➡️", use_container_width=True):
+        if st.button("继续 ➡️", type="primary"):
             st.session_state.quiz_index += 1
             st.session_state.question_type = random.choice(['en2zh', 'zh2en'])
             st.session_state.show_answer = False
             st.rerun()
             
-    st.divider()
-    if st.button("中断并返回主菜单"):
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    if st.button("结束本次练习"):
         go_to('main_menu')
 
 # --- 错题本页面 ---
 def show_mistakes():
-    st.title("📓 错题本")
+    st.markdown("<h2 style='text-align: center; color: #ff4b4b;'>💔 错题本</h2>", unsafe_allow_html=True)
     mistakes = list(st.session_state.progress["mistakes"].keys())
     
     if not mistakes:
-        st.success("🎉 你的错题本是空的！继续保持！")
+        st.success("🎉 你的错题本是空的！完美！")
     else:
         for word in mistakes:
             info = st.session_state.words_dict[word]
             mistake_data = st.session_state.progress["mistakes"][word]
             
-            with st.expander(f"{word} (错 {mistake_data['count']} 次)"):
+            with st.expander(f"🔴 {word} (错了 {mistake_data['count']} 次)"):
                 st.write(f"**音标:** {info['phonetic']}")
                 st.write(f"**释义:** {info['meaning']}")
                 st.write(f"**笔记:** {mistake_data['note']}")
                 
-    st.divider()
-    if st.button("返回主菜单", use_container_width=True):
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("返回主页", type="primary"):
         go_to('main_menu')
 
 # --- 渲染控制 ---
