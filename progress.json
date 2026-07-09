@@ -303,6 +303,10 @@
         "club": {
             "interval": 1,
             "next_review": "2026-07-10"
+        },
+        "gym": {
+            "interval": 1,
+            "next_review": "2026-07-10"
         }
     },
     "mistakes": {
@@ -461,7 +465,7 @@
     },
     "daily_stats": {
         "date": "2026-07-09",
-        "new_learned": 26
+        "new_learned": 27
     },
     "streak_days": 1,
     "last_study_date": "2026-07-09"
