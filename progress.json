@@ -267,6 +267,10 @@
         "port": {
             "interval": 1,
             "next_review": "2026-07-10"
+        },
+        "library": {
+            "interval": 0,
+            "next_review": "2026-07-10"
         }
     },
     "mistakes": {
@@ -401,11 +405,15 @@
         "court": {
             "count": 1,
             "note": ""
+        },
+        "library": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-07-09",
-        "new_learned": 17
+        "new_learned": 18
     },
     "streak_days": 1,
     "last_study_date": "2026-07-09"
