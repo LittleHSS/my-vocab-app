@@ -319,6 +319,10 @@
         "post office": {
             "interval": 0,
             "next_review": "2026-07-10"
+        },
+        "tomato": {
+            "interval": 0,
+            "next_review": "2026-07-10"
         }
     },
     "mistakes": {
@@ -481,11 +485,15 @@
         "post office": {
             "count": 1,
             "note": ""
+        },
+        "tomato": {
+            "count": 2,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-07-09",
-        "new_learned": 30
+        "new_learned": 31
     },
     "streak_days": 1,
     "last_study_date": "2026-07-09"
