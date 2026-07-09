@@ -327,6 +327,10 @@
         "asparagus": {
             "interval": 0,
             "next_review": "2026-07-10"
+        },
+        "cucumber": {
+            "interval": 0,
+            "next_review": "2026-07-10"
         }
     },
     "mistakes": {
@@ -497,11 +501,15 @@
         "asparagus": {
             "count": 1,
             "note": ""
+        },
+        "cucumber": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-07-09",
-        "new_learned": 32
+        "new_learned": 33
     },
     "streak_days": 1,
     "last_study_date": "2026-07-09"
