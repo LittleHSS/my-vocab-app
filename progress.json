@@ -231,6 +231,10 @@
         "bookstore": {
             "interval": 0,
             "next_review": "2026-07-10"
+        },
+        "market": {
+            "interval": 1,
+            "next_review": "2026-07-10"
         }
     },
     "mistakes": {
@@ -357,7 +361,7 @@
     },
     "daily_stats": {
         "date": "2026-07-09",
-        "new_learned": 8
+        "new_learned": 9
     },
     "streak_days": 1,
     "last_study_date": "2026-07-09"
