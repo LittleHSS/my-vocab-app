@@ -7,6 +7,10 @@
         "become": {
             "interval": 0,
             "next_review": "2026-10-20"
+        },
+        "begin": {
+            "interval": 0,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
@@ -17,11 +21,15 @@
         "become": {
             "count": 1,
             "note": ""
+        },
+        "begin": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 2
+        "new_learned": 3
     },
     "streak_days": 1,
     "last_study_date": "2026-10-19"
