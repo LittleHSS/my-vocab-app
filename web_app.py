@@ -443,22 +443,44 @@ def show_quiz():
         st.markdown(f"<div class='phonetic-tag'>{info['phonetic']}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # 浏览器原生标准发音按钮
+    # 顶级真人原声发音组件 (英音 UK + 美音 US 独立双声道切换，支持自动回退)
     sound_js = f"""
-    <div style="text-align: center; margin-bottom: 20px;">
-        <button onclick="speakWord()" style="background:#1cb0f6; color:white; border:none; padding:10px 22px; border-radius:14px; font-weight:800; font-size:15px; cursor:pointer; box-shadow: 0 4px 0 #1899d6;">
-            🔊 播放发音
+    <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 20px;">
+        <button id="btn_uk" onclick="playAudio('uk')" style="background:#58cc02; color:white; border:none; padding:10px 20px; border-radius:14px; font-weight:800; font-size:15px; cursor:pointer; box-shadow: 0 4px 0 #46a302; display: flex; align-items: center; gap: 6px;">
+            🇬🇧 英音发音
+        </button>
+        <button id="btn_us" onclick="playAudio('us')" style="background:#1cb0f6; color:white; border:none; padding:10px 20px; border-radius:14px; font-weight:800; font-size:15px; cursor:pointer; box-shadow: 0 4px 0 #1899d6; display: flex; align-items: center; gap: 6px;">
+            🇺🇸 美音发音
         </button>
     </div>
+    <audio id="audio_player" style="display:none;"></audio>
     <script>
-        function speakWord() {{
-            var msg = new SpeechSynthesisUtterance('{curr_word}');
-            msg.lang = 'en-US';
-            msg.rate = 0.9;
-            window.speechSynthesis.speak(msg);
+        var rawWord = encodeURIComponent("{curr_word.strip().lower()}");
+        
+        function playAudio(accent) {{
+            var typeVal = (accent === 'uk') ? '1' : '2';
+            var audioUrl = "https://dict.youdao.com/dictvoice?type=" + typeVal + "&audio=" + rawWord;
+            var player = document.getElementById("audio_player");
+            
+            player.src = audioUrl;
+            var playPromise = player.play();
+            
+            if (playPromise !== undefined) {{
+                playPromise.catch(function(error) {{
+                    // 若网络受限或无法加载，平滑回退到浏览器本地高保真合成发音
+                    var fallbackLang = (accent === 'uk') ? 'en-GB' : 'en-US';
+                    var msg = new SpeechSynthesisUtterance("{curr_word}");
+                    msg.lang = fallbackLang;
+                    msg.rate = 0.85;
+                    window.speechSynthesis.speak(msg);
+                }});
+            }}
         }}
-        // 自动轻声播放一次
-        window.onload = function() {{ speakWord(); }};
+
+        // 默认载入时轻声播放英音（新概念传统英音）
+        window.onload = function() {{
+            setTimeout(function() {{ playAudio('uk'); }}, 200);
+        }};
     </script>
     """
     st.components.v1.html(sound_js, height=65)
