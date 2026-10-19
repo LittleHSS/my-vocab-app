@@ -87,6 +87,10 @@
         "always": {
             "interval": 1,
             "next_review": "2026-10-20"
+        },
+        "am": {
+            "interval": 1,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
@@ -97,7 +101,7 @@
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 22,
+        "new_learned": 23,
         "reviewed": 0
     },
     "streak_days": 1,
