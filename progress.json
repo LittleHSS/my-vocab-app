@@ -99,6 +99,10 @@
         "among": {
             "interval": 1,
             "next_review": "2026-10-20"
+        },
+        "angry": {
+            "interval": 1,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
@@ -109,7 +113,7 @@
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 25,
+        "new_learned": 26,
         "reviewed": 0
     },
     "streak_days": 1,
