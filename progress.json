@@ -3,17 +3,25 @@
         "be": {
             "interval": 0,
             "next_review": "2026-10-20"
+        },
+        "become": {
+            "interval": 0,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
         "be": {
             "count": 1,
             "note": ""
+        },
+        "become": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 1
+        "new_learned": 2
     },
     "streak_days": 1,
     "last_study_date": "2026-10-19"
