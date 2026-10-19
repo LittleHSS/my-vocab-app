@@ -91,6 +91,10 @@
         "am": {
             "interval": 1,
             "next_review": "2026-10-20"
+        },
+        "American": {
+            "interval": 1,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
@@ -101,7 +105,7 @@
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 23,
+        "new_learned": 24,
         "reviewed": 0
     },
     "streak_days": 1,
