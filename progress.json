@@ -111,6 +111,10 @@
         "answer": {
             "interval": 1,
             "next_review": "2026-10-20"
+        },
+        "any": {
+            "interval": 1,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
@@ -121,7 +125,7 @@
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 28,
+        "new_learned": 29,
         "reviewed": 0
     },
     "streak_days": 1,
