@@ -67,6 +67,10 @@
         "airport": {
             "interval": 1,
             "next_review": "2026-10-20"
+        },
+        "almost": {
+            "interval": 1,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
@@ -77,7 +81,7 @@
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 17,
+        "new_learned": 18,
         "reviewed": 0
     },
     "streak_days": 1,
