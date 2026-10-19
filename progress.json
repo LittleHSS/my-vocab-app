@@ -25,6 +25,10 @@
             "next_review": "2026-10-20"
         },
         "buy": {
+            "interval": 0,
+            "next_review": "2026-10-20"
+        },
+        "catch": {
             "interval": 1,
             "next_review": "2026-10-20"
         }
@@ -49,11 +53,15 @@
         "build": {
             "count": 1,
             "note": ""
+        },
+        "buy": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 7
+        "new_learned": 8
     },
     "streak_days": 1,
     "last_study_date": "2026-10-19"
