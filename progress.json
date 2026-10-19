@@ -15,6 +15,10 @@
         "break": {
             "interval": 0,
             "next_review": "2026-10-20"
+        },
+        "bring": {
+            "interval": 1,
+            "next_review": "2026-10-20"
         }
     },
     "mistakes": {
@@ -37,7 +41,7 @@
     },
     "daily_stats": {
         "date": "2026-10-19",
-        "new_learned": 4
+        "new_learned": 5
     },
     "streak_days": 1,
     "last_study_date": "2026-10-19"
