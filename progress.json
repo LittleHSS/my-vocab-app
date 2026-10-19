@@ -1,68 +1,10 @@
 {
-    "words_status": {
-        "be": {
-            "interval": 0,
-            "next_review": "2026-10-20"
-        },
-        "become": {
-            "interval": 0,
-            "next_review": "2026-10-20"
-        },
-        "begin": {
-            "interval": 0,
-            "next_review": "2026-10-20"
-        },
-        "break": {
-            "interval": 0,
-            "next_review": "2026-10-20"
-        },
-        "bring": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        },
-        "build": {
-            "interval": 0,
-            "next_review": "2026-10-20"
-        },
-        "buy": {
-            "interval": 0,
-            "next_review": "2026-10-20"
-        },
-        "catch": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        }
-    },
-    "mistakes": {
-        "be": {
-            "count": 1,
-            "note": ""
-        },
-        "become": {
-            "count": 1,
-            "note": ""
-        },
-        "begin": {
-            "count": 1,
-            "note": ""
-        },
-        "break": {
-            "count": 1,
-            "note": ""
-        },
-        "build": {
-            "count": 1,
-            "note": ""
-        },
-        "buy": {
-            "count": 1,
-            "note": ""
-        }
-    },
+    "words_status": {},
+    "mistakes": {},
     "daily_stats": {
-        "date": "2026-10-19",
-        "new_learned": 8
+        "date": "2026-10-05",
+        "new_learned": 0
     },
-    "streak_days": 1,
-    "last_study_date": "2026-10-19"
+    "streak_days": 0,
+    "last_study_date": ""
 }
