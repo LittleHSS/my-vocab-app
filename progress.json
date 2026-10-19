@@ -1,49 +1,10 @@
 {
-    "words_status": {
-        "above": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        },
-        "abroad": {
-            "interval": 0,
-            "next_review": "2026-10-20"
-        },
-        "accident": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        },
-        "across": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        },
-        "actor": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        },
-        "actress": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        },
-        "address": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        },
-        "aeroplane": {
-            "interval": 1,
-            "next_review": "2026-10-20"
-        }
-    },
-    "mistakes": {
-        "abroad": {
-            "count": 1,
-            "note": ""
-        }
-    },
+    "words_status": {},
+    "mistakes": {},
     "daily_stats": {
-        "date": "2026-10-19",
-        "new_learned": 8,
-        "reviewed": 0
+        "date": "2026-10-05",
+        "new_learned": 0
     },
-    "streak_days": 1,
-    "last_study_date": "2026-10-19"
+    "streak_days": 0,
+    "last_study_date": ""
 }
