@@ -323,6 +323,10 @@
         "behind": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "believe": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -341,7 +345,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 49,
+        "new_learned": 50,
         "reviewed": 1
     },
     "streak_days": 2,
