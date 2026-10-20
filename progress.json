@@ -127,6 +127,10 @@
         "anything": {
             "interval": 1,
             "next_review": "2026-10-20"
+        },
+        "anywhere": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -136,10 +140,10 @@
         }
     },
     "daily_stats": {
-        "date": "2026-10-19",
-        "new_learned": 32,
+        "date": "2026-10-20",
+        "new_learned": 1,
         "reviewed": 0
     },
-    "streak_days": 1,
-    "last_study_date": "2026-10-19"
+    "streak_days": 2,
+    "last_study_date": "2026-10-20"
 }
