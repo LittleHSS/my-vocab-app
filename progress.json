@@ -195,17 +195,25 @@
         "at once": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "Athens": {
+            "interval": 0,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
         "abroad": {
             "count": 1,
             "note": ""
+        },
+        "Athens": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 17,
+        "new_learned": 18,
         "reviewed": 1
     },
     "streak_days": 2,
