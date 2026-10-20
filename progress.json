@@ -263,6 +263,10 @@
         "basket": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "bath": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -281,7 +285,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 34,
+        "new_learned": 35,
         "reviewed": 1
     },
     "streak_days": 2,
