@@ -402,6 +402,8 @@ ADJECTIVE_COMPARATIVES = {
     "far": ("farther / further", "farthest / furthest")
 }
 
+from special_dict_part1 import SPECIAL_DICT
+
 def derive_word_metadata(word_raw, meaning_raw):
     """
     智能推导单词的形态格式（第三人称单数、过去式、过去分词、现在分词、名词复数等）、英文释义与例句
@@ -409,6 +411,17 @@ def derive_word_metadata(word_raw, meaning_raw):
     word = word_raw.strip()
     w_lower = word.lower()
     meaning = meaning_raw.strip()
+
+    # 0. 优先精准匹配权威词典数据
+    if w_lower in SPECIAL_DICT:
+        d = SPECIAL_DICT[w_lower]
+        return {
+            "type": "special",
+            "forms": d["forms"],
+            "en": d["en"],
+            "eg": d["eg"],
+            "cn": d["cn"]
+        }
 
     is_verb = meaning.startswith("v.") or " v. " in meaning or "modal v." in meaning
     is_noun = meaning.startswith("n.") or " n. " in meaning
