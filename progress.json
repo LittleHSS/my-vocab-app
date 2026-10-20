@@ -3,12 +3,16 @@
         "above": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "abroad": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {},
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 1,
+        "new_learned": 2,
         "reviewed": 0
     },
     "streak_days": 1,
