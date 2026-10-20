@@ -443,6 +443,10 @@
         "break": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "breakfast": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -469,7 +473,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 79,
+        "new_learned": 80,
         "reviewed": 1
     },
     "streak_days": 2,
