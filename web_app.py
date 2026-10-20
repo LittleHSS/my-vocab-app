@@ -4,6 +4,7 @@ import json
 import os
 import random
 from datetime import datetime, timedelta
+from vocab_metadata import derive_word_metadata
 
 # --- 页面配置 ---
 st.set_page_config(page_title="新概念超级背单词", page_icon="🦉", layout="centered")
@@ -104,7 +105,52 @@ st.markdown("""
         font-size: 18px;
         color: #1cb0f6;
         font-weight: 700;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
+    }
+
+    /* 语法形态标签排版与释义例句卡片 */
+    .meta-box {
+        background-color: #f8fafc;
+        border-radius: 14px;
+        border: 1.5px solid #e2e8f0;
+        padding: 16px;
+        margin-top: 14px;
+        text-align: left;
+    }
+    .form-pill {
+        display: inline-block;
+        background-color: #e0f2fe;
+        color: #0369a1;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        margin: 3px 4px 3px 0;
+        border: 1px solid #bae6fd;
+    }
+    .en-def {
+        font-size: 14px;
+        color: #475569;
+        font-style: italic;
+        margin: 6px 0 10px 0;
+        line-height: 1.4;
+    }
+    .eg-box {
+        background-color: #ffffff;
+        border-left: 4px solid #1cb0f6;
+        padding: 8px 12px;
+        border-radius: 0 10px 10px 0;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+    .eg-en {
+        color: #1e293b;
+        font-weight: 700;
+        margin-bottom: 2px;
+    }
+    .eg-cn {
+        color: #64748b;
+        font-size: 13px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -495,11 +541,44 @@ def show_quiz():
                 handle_answer_submit(is_correct, selected_idx=i)
                 st.rerun()
     else:
+        # 获取单词详尽语法形态、英文释义与例句
+        meta = derive_word_metadata(curr_word, info["meaning"])
+
+        # 语法形态标签生成
+        forms_html = "".join([f"<span class='form-pill'><b>{k}:</b> {v}</span>" for k, v in meta["forms"].items()])
+        
+        # 英文释义与例句卡片 HTML
+        detail_card = f"""
+        <div class="meta-box">
+            <div style="font-size:13px; font-weight:800; color:#0369a1; text-transform:uppercase; margin-bottom:4px;">
+                🧩 词形变化与核心语法 (Word Forms)
+            </div>
+            <div>{forms_html}</div>
+            
+            <div style="font-size:13px; font-weight:800; color:#475569; text-transform:uppercase; margin-top:12px; margin-bottom:2px;">
+                📖 英文释义 (English Definition)
+            </div>
+            <div class="en-def">{meta['en']}</div>
+            
+            <div style="font-size:13px; font-weight:800; color:#0284c7; text-transform:uppercase; margin-top:8px;">
+                💡 经典实战例句 (Example Sentence)
+            </div>
+            <div class="eg-box">
+                <div class="eg-en">{meta['eg']}</div>
+                <div class="eg-cn">{meta['cn']}</div>
+            </div>
+        </div>
+        """
+
         # 显示答题结果与详尽解析
         if st.session_state.last_result:
-            st.success(f"🎯 **太棒了！回答正确！**\n\n**{curr_word}** {info['phonetic']}\n\n**释义:** {info['meaning']}")
+            st.success(f"🎯 **太棒了！回答正确！**\n\n**{curr_word}** {info['phonetic']}\n\n**中文释义:** {info['meaning']}")
         else:
-            st.error(f"❌ **差一点点！正确答案是：**\n\n**{curr_word}** {info['phonetic']}\n\n**释义:** {info['meaning']}\n\n*(已自动加入错题本，稍后将强化复习)*")
+            st.error(f"❌ **差一点点！正确答案是：**\n\n**{curr_word}** {info['phonetic']}\n\n**中文释义:** {info['meaning']}\n\n*(已自动加入错题本，稍后将强化复习)*")
+
+        # 渲染语法形态与例句卡片
+        st.markdown(detail_card, unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
 
         if st.button("下一个单词 ➡️", type="primary"):
             st.session_state.quiz_index += 1
@@ -537,9 +616,13 @@ def show_dictionary():
         status_tag = "👑 已学" if w in words_status else "⚪ 未学"
         with st.expander(f"{w}  |  {info['phonetic']}  |  {status_tag}"):
             st.write(f"**中文释义:** {info['meaning']}")
+            meta = derive_word_metadata(w, info["meaning"])
+            forms_str = "  •  ".join([f"**{k}:** `{v}`" for k, v in meta["forms"].items()])
+            st.markdown(f"**词形变化:** {forms_str}")
+            st.markdown(f"**英文释义:** *{meta['en']}*")
+            st.markdown(f"**经典例句:** {meta['eg']} (*{meta['cn']}*)")
             if w in words_status:
-                st.write(f"**记忆周期级别:** Lvl {words_status[w].get('interval', 0)}")
-                st.write(f"**下次复习日期:** {words_status[w].get('next_review', '')}")
+                st.write(f"**记忆周期级别:** Lvl {words_status[w].get('interval', 0)} | **下次复习:** {words_status[w].get('next_review', '')}")
 
     if len(filtered_words) > 100:
         st.info("💡 为保证页面流畅，已展示前 100 条结果，请输入更精确的关键词搜索。")
