@@ -539,13 +539,42 @@ def derive_word_metadata(word_raw, meaning_raw):
         meta["cn"] = f"这件外套很{clean_meaning}，但那一件更{clean_meaning}。"
         return meta
 
-    # 5. 动词短语 / 介词 / 副词 / 其他
+    # 5. 副词形态推导 (adv.)
+    if is_adv and " " not in word:
+        meta["type"] = "adv"
+        clean_meaning = meaning.replace("adv.", "").strip().split("；")[0].split("，")[0]
+        meta["forms"] = {
+            "词性 (Part of Speech)": "副词 (Adverb)",
+            "修饰用法 (Usage)": f"修饰动词或整句 ({word})"
+        }
+        meta["en"] = f"in or to a particular manner or place: {clean_meaning}."
+        if w_lower in ["abroad"]:
+            meta["eg"] = "He has lived abroad for more than five years."
+            meta["cn"] = "他在国外已经生活了五年多。"
+        elif w_lower in ["already"]:
+            meta["eg"] = "I have already finished my homework."
+            meta["cn"] = "我已经完成了我的家庭作业。"
+        elif w_lower in ["yet"]:
+            meta["eg"] = "Have you eaten lunch yet? — Not yet."
+            meta["cn"] = "你吃过午饭了吗？— 还没有。"
+        elif w_lower in ["often", "always", "usually", "sometimes", "never"]:
+            meta["eg"] = f"He {w_lower} goes to school by bicycle."
+            meta["cn"] = f"他{clean_meaning}骑自行车去上学。"
+        elif w_lower in ["yesterday", "today", "tomorrow"]:
+            meta["eg"] = f"I met him at the station {w_lower}."
+            meta["cn"] = f"我{clean_meaning}在车站遇见了他。"
+        else:
+            meta["eg"] = f"He spoke very {w_lower}."
+            meta["cn"] = f"他说话非常{clean_meaning}。"
+        return meta
+
+    # 6. 动词短语 / 介词 / 连词 / 其他
     clean_meaning = meaning.split(" ")[-1]
     meta["type"] = "phrase"
     meta["forms"] = {
         "词组/搭配形式 (Structure)": word
     }
-    meta["en"] = f"an English expression or modifier meaning {clean_meaning}."
-    meta["eg"] = f"Please {w_lower} before you leave the room."
-    meta["cn"] = f"在你离开房间之前，请{clean_meaning}。"
+    meta["en"] = f"an English expression or grammatical marker meaning {clean_meaning}."
+    meta["eg"] = f"You should pay attention to this expression: '{word}'."
+    meta["cn"] = f"你应该注意这个表达搭配：'{clean_meaning}'。"
     return meta
