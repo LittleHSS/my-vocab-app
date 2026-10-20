@@ -439,6 +439,10 @@
         "bread": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "break": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -465,7 +469,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 78,
+        "new_learned": 79,
         "reviewed": 1
     },
     "streak_days": 2,
