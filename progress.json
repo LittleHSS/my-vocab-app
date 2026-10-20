@@ -327,6 +327,10 @@
         "believe": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "belong": {
+            "interval": 0,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -341,11 +345,15 @@
         "attendant": {
             "count": 1,
             "note": ""
+        },
+        "belong": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 50,
+        "new_learned": 51,
         "reviewed": 1
     },
     "streak_days": 2,
