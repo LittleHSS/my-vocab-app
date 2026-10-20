@@ -387,6 +387,10 @@
         "blouse": {
             "interval": 0,
             "next_review": "2026-10-21"
+        },
+        "blue": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -413,7 +417,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 65,
+        "new_learned": 66,
         "reviewed": 1
     },
     "streak_days": 2,
