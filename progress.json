@@ -339,6 +339,10 @@
         "below": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "belt": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -361,7 +365,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 53,
+        "new_learned": 54,
         "reviewed": 1
     },
     "streak_days": 2,
