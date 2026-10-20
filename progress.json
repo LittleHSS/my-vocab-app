@@ -199,6 +199,10 @@
         "Athens": {
             "interval": 0,
             "next_review": "2026-10-21"
+        },
+        "attendant": {
+            "interval": 0,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -209,11 +213,15 @@
         "Athens": {
             "count": 1,
             "note": ""
+        },
+        "attendant": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 18,
+        "new_learned": 19,
         "reviewed": 1
     },
     "streak_days": 2,
