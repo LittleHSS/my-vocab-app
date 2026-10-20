@@ -7,12 +7,16 @@
         "abroad": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "accident": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {},
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 2,
+        "new_learned": 3,
         "reviewed": 0
     },
     "streak_days": 1,
