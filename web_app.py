@@ -547,28 +547,26 @@ def show_quiz():
         # 语法形态标签生成
         forms_html = "".join([f"<span class='form-pill'><b>{k}:</b> {v}</span>" for k, v in meta["forms"].items()])
         
-        # 英文释义与例句卡片 HTML
-        detail_card = f"""
-        <div class="meta-box">
-            <div style="font-size:13px; font-weight:800; color:#0369a1; text-transform:uppercase; margin-bottom:4px;">
-                🧩 词形变化与核心语法 (Word Forms)
-            </div>
-            <div>{forms_html}</div>
-            
-            <div style="font-size:13px; font-weight:800; color:#475569; text-transform:uppercase; margin-top:12px; margin-bottom:2px;">
-                📖 英文释义 (English Definition)
-            </div>
-            <div class="en-def">{meta['en']}</div>
-            
-            <div style="font-size:13px; font-weight:800; color:#0284c7; text-transform:uppercase; margin-top:8px;">
-                💡 经典实战例句 (Example Sentence)
-            </div>
-            <div class="eg-box">
-                <div class="eg-en">{meta['eg']}</div>
-                <div class="eg-cn">{meta['cn']}</div>
-            </div>
-        </div>
-        """
+        # 英文释义与例句卡片 HTML (紧凑单行无前导缩进，杜绝 Markdown 代码块误判)
+        detail_card = (
+            '<div class="meta-box">'
+            '<div style="font-size:13px; font-weight:800; color:#0369a1; text-transform:uppercase; margin-bottom:4px;">'
+            '🧩 词形变化与核心语法 (Word Forms)'
+            '</div>'
+            f'<div>{forms_html}</div>'
+            '<div style="font-size:13px; font-weight:800; color:#475569; text-transform:uppercase; margin-top:12px; margin-bottom:2px;">'
+            '📖 英文释义 (English Definition)'
+            '</div>'
+            f'<div class="en-def">{meta["en"]}</div>'
+            '<div style="font-size:13px; font-weight:800; color:#0284c7; text-transform:uppercase; margin-top:8px;">'
+            '💡 经典实战例句 (Example Sentence)'
+            '</div>'
+            '<div class="eg-box">'
+            f'<div class="eg-en">{meta["eg"]}</div>'
+            f'<div class="eg-cn">{meta["cn"]}</div>'
+            '</div>'
+            '</div>'
+        )
 
         # 显示答题结果与详尽解析
         if st.session_state.last_result:
