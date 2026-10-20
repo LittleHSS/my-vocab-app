@@ -207,6 +207,10 @@
         "August": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "autumn": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -225,7 +229,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 20,
+        "new_learned": 21,
         "reviewed": 1
     },
     "streak_days": 2,
