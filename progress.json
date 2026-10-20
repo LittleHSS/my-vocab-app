@@ -423,6 +423,10 @@
         "borrow": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "both... and...": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -449,7 +453,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 74,
+        "new_learned": 75,
         "reviewed": 1
     },
     "streak_days": 2,
