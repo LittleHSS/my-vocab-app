@@ -283,6 +283,10 @@
         "beautiful": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "beauty": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -301,7 +305,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 39,
+        "new_learned": 40,
         "reviewed": 1
     },
     "streak_days": 2,
