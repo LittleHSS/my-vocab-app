@@ -331,6 +331,10 @@
         "belong": {
             "interval": 0,
             "next_review": "2026-10-21"
+        },
+        "belong to": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -353,7 +357,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 51,
+        "new_learned": 52,
         "reviewed": 1
     },
     "streak_days": 2,
