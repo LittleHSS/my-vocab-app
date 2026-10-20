@@ -167,6 +167,10 @@
         "ashamed": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "ask": {
+            "interval": 2,
+            "next_review": "2026-10-22"
         }
     },
     "mistakes": {
@@ -177,8 +181,8 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 10,
-        "reviewed": 0
+        "new_learned": 11,
+        "reviewed": 1
     },
     "streak_days": 2,
     "last_study_date": "2026-10-20"
