@@ -179,6 +179,10 @@
         "aspirin": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "assistant": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -189,7 +193,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 13,
+        "new_learned": 14,
         "reviewed": 1
     },
     "streak_days": 2,
