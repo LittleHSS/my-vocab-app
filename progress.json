@@ -175,6 +175,10 @@
         "asleep": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "aspirin": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -185,7 +189,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 12,
+        "new_learned": 13,
         "reviewed": 1
     },
     "streak_days": 2,
