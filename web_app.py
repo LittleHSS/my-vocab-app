@@ -213,20 +213,27 @@ def save_progress_data(data):
     except Exception as e:
         st.warning(f"本地保存警告: {e}")
 
-    # 2. 尝试静默同步到 GitHub (若配置了secrets)
+    # 2. 尝试实时同步到 GitHub (若配置了secrets)
     repo = get_github_repo_safe()
     if repo:
         try:
             contents = repo.get_contents(PROGRESS_FILE)
             repo.update_file(
                 contents.path,
-                f"Auto sync: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+                f"Auto sync: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
                 json.dumps(data, ensure_ascii=False, indent=4),
                 contents.sha
             )
-        except Exception:
-            # 云端同步延迟或冲突不中断本地答题流畅度
-            pass
+        except Exception as e:
+            # 若云端文件尚不存在，尝试创建
+            try:
+                repo.create_file(
+                    PROGRESS_FILE,
+                    f"Create progress: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+                    json.dumps(data, ensure_ascii=False, indent=4)
+                )
+            except Exception:
+                pass
 
 @st.cache_data
 def load_all_words():
