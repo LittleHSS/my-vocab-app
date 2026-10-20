@@ -383,6 +383,10 @@
         "black": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "blouse": {
+            "interval": 0,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -401,11 +405,15 @@
         "belong": {
             "count": 1,
             "note": ""
+        },
+        "blouse": {
+            "count": 1,
+            "note": ""
         }
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 64,
+        "new_learned": 65,
         "reviewed": 1
     },
     "streak_days": 2,
