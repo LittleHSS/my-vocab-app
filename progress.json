@@ -271,6 +271,10 @@
         "bathroom": {
             "interval": 1,
             "next_review": "2026-10-21"
+        },
+        "be": {
+            "interval": 1,
+            "next_review": "2026-10-21"
         }
     },
     "mistakes": {
@@ -289,7 +293,7 @@
     },
     "daily_stats": {
         "date": "2026-10-20",
-        "new_learned": 36,
+        "new_learned": 37,
         "reviewed": 1
     },
     "streak_days": 2,
